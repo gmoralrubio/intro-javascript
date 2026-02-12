@@ -220,3 +220,29 @@ const esEstudiante = true;
 const esTrabajador = false;
 const tieneDescuento = esEstudiante || esTrabajador;
 console.log("¿Tiene descuento?:", tieneDescuento); // true
+
+// Operador incremento y decremento
+console.clear();
+let contador = 0;
+console.log("contador", contador);
+
+contador++;
+contador++;
+contador++;
+console.log("contador incremento 1", contador);
+
+// decremento
+let vidas2 = 5;
+console.log("vidas: ", vidas2);
+
+vidas2--;
+console.log("vidas decremento 1", vidas2);
+
+// delante o después:
+let a = 5;
+console.log("a++", a++); // 5 (muestra el valor, y luego lo incremente)
+console.log("a++", a); // 6
+
+let b = 5;
+console.log("++b", ++b); 
+console.log("b final:", b);
