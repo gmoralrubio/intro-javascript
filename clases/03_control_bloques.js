@@ -1,9 +1,13 @@
 console.log("ESTRUCTURAS DE CONTROL");
 
-// IF/ELSE
-// Son condicionales que nos permiten ejecutar código SOLO si se cumple una condición
 
-// IF
+// ============================================
+// SENTENCIAS CONDICIONALES - IF/ELSE
+// ============================================
+
+// Las estructuras condicionales nos permiten ejecutar código SOLO si se cumple una condición
+
+// IF simple:
 
 const temperatura = 30;
 if (temperatura > 25) {
@@ -15,7 +19,7 @@ if (esAdulto) {
   console.log("Eres adulto");
 }
 
-// bifurcar IF...ELSE
+// bifurcar IF...ELSE, es decir, o una cosa u otra
 const edad = 16;
 
 if (edad >= 18) {
@@ -28,11 +32,13 @@ if (edad >= 18) {
 const miEdad = 22;
 
 if (miEdad >= 18)
-  console.log("Puedes entrar ahora");
+  console.log("Puedes entrar ahora"); // Esto es como ponerlo todo en una línea.
 
 console.log("Bienvenido!");
 
-//
+// Imprime "Bienvenido!" porque el primer console.log es parte del if, el segundo no, aunque no estén implícitas las llaves, por eso es importante usarlas como forma del BLOQUE de código
+
+// Aquí ya podemos ver ejemplo de lógica de negocio
 const nombreProducto1 = "T-Shirt";
 const precioProducto1 = 50;
 let cantidadProducto1 = 2;
@@ -49,6 +55,7 @@ if (totalDespuesDeDescuento > 50) {
   console.log("Costes de envío aplicados");
 }
 
+// Podemos usarlo para reasignar variables:
 let mensaje;
 if (precioProducto1 < precioProducto2) {
   mensaje = "Producto T-shirt tiene mejor precio que Jeans"
@@ -57,8 +64,9 @@ if (precioProducto1 < precioProducto2) {
 }
 console.log(mensaje);
 
-// ENCADENAMIENTO DE CONDICIONES
+// ==== ENCADENAMIENTO DE CONDICIONES ====
 // If....else if .... else
+// En este caso el orden importa, y la primera condición que se ejecuta gana.
 
 const nota = 60;
 
@@ -85,7 +93,20 @@ if (score >= 90) {
 console.log(mensaje2);
 
 
-// Hoisting
+// ==== Hoisting ====
+/**
+ * La palabra hoisting significa literalmente:
+
+Elevar o "izar hacia arriba"
+
+En JavaScript significa que:
+
+El motor mueve las declaraciones al principio del archivo antes de ejecutar el código.
+
+Importante:
+No mueve el código físicamente.
+Lo que mueve es la declaración internamente.
+ */
 
 // var:
 console.log(userName);
@@ -95,6 +116,7 @@ var userName = "Alicia";
 // console.log(userAge);
 // let userAge = 30;
 
+
 // CONDICIONES COMBINADAS:
 
 const edad5 = 25;
@@ -102,12 +124,13 @@ const tieneLicencia = false;
 const puedeConducir = edad5 >= 18 && tieneLicencia;
 
 if (puedeConducir) {
-  console.log("puedes conducir");
+  console.log("Puedes conducir");
 } else {
-  console.log("no puedes conducir");
+  console.log("No puedes conducir");
 }
 
-// caso práctico descuentos
+
+// CASO PRÁCTICO: Sistema de descuentos
 const precioOriginal = 100;
 const esEstudiante = false;
 const esMiembro = true;
@@ -125,6 +148,7 @@ if (esEstudiante) {
 console.log(`Precio original: ${precioOriginal} €`);
 console.log(`Precio final: ${precioFinal} €`);
 
+
 console.log("\nEJERCICIO 2 - Par o Impar:");
 const numero2 = 20;
 
@@ -134,14 +158,24 @@ if (numero2 % 2 === 0) {
   console.log(`El número ${numero2} es impar`)
 }
 
-// OPERADOR TERNARIO
-// () ? "" : ""; if...else
+
+// ==== OPERADOR TERNARIO ====
+/*
+Forma abreviada de if/else para asignaciones simples
+
+SINTAXIS:
+condición ? valorSiTrue : valorSiFalse
+*/
+
+// () ? "" : ""; equivale a if...else
+
 
 const edad3 = 20;
 
 const mensaje3 = edad3 >= 18 ? "Mayor de edad" : "Menor de edad";
 console.log(mensaje3);
 
+// Equivalente con if/else:
 let mensaje4;
 if (edad3 >= 18) {
   mensaje4 = "Mayor de edad";
@@ -150,7 +184,7 @@ if (edad3 >= 18) {
 }
 console.log(mensaje4);
 
-// caso práctico
+// Caso práctico
 const puntos2 = 50;
 const estado = puntos2 >= 100 ? "VIP" : "Regular";
 console.log("Estado del cliente:", estado);
@@ -158,6 +192,9 @@ console.log("Estado del cliente:", estado);
 let isLoggedIn;
 const mensajeHome = isLoggedIn ? "Welcome back" : "Please login";
 console.log(mensajeHome);
+
+
+// Encadenar operadores ternarios, si hay muchos puede dificultar la lectura:
 
 let isAdmin = true;
 
@@ -170,6 +207,7 @@ const mensajeHome2 = isLoggedIn && isAdmin
 console.log(mensajeHome2);
 
 
+// Otro caso práctico:
 // Nos vamos o no a Disney
 const tenerVacaciones = false;
 const suficienteDinero = false;
@@ -182,15 +220,21 @@ if (tenerVacaciones && suficienteDinero && hijaGustaDisney) {
 } else if (tenerVacaciones && suficienteDinero) {
   mensajeFamilia = "Vamos a Murcia";
 } else {
-  mensajeFamilia = "No podemos ir a Disney AÚN ni MURCIA";
+  mensajeFamilia = "No podemos ir a Disney AÚN ni a MURCIA";
 }
 
 console.log(mensajeFamilia);
 
 console.clear();
 
-// === SWITCH ===
-// Podemos tener varias condiciones encadenadas, pero podemos mejorar la legibilidad y mantebilidad
+
+// ==== SWITCH ====
+/*
+Switch es útil cuando tienes MUCHAS opciones para evaluar
+*/
+
+
+// Podemos tener varias condiciones encadenadas, pero podemos mejorar la legibilidad. Por ejemplo, si tenemos varias condiciones if...else encadenadas:
 
 const role = "editor";
 
@@ -205,7 +249,7 @@ if (role === "admin") {
 }
 
 // REFACTOR con Switch ...case ...default
-// VALIDA VALOR Y TIPO:
+// Y VALIDA VALOR Y TIPO:
 
 switch (role) {
   case "admin":
@@ -221,6 +265,7 @@ switch (role) {
     console.log("No access SWITCH");
 }
 
+// Otro ejemplo:
 const dia = 5;
 
 let diaDeLaSemana;
@@ -308,7 +353,7 @@ Si el total es mayor a 100, muestra "Has alcanzado el límite de tu compra".
 Muestra el total y el mensaje en un único console.log.
 */
 
-
+// Solución:
 const subtotalA = productAPrice * productAQuantity
 const subtotalB = productBPrice * productBQuantity
 const subtotalC = productCPrice * productCQuantity

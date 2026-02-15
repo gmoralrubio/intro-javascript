@@ -1,22 +1,23 @@
-console.log("string methods");
+console.log("String Methods");
 
 // length, includes, trim, tolowercase, touppercase, charat, indexof, slice, replace, chaining
 
+// Vamos a usar principalmente esta cadena para algunos los ejemplos
 let message = "  Hello Keepcoding!   ";
 let course = "Introducción a Javascript";
 
 console.log("Original:", message);
 console.log("Curso:", course);
 
-// LENGTH: Longitud de un string
+// ==== LENGTH: Longitud de un string ====
 const messageLength = message.length;
 console.log(messageLength);
 console.log(course.length);
 
-// includes() - verificar si contiene texto
+// ==== includes() - verificar si contiene texto ====
 console.log(course.includes("Javascript"));
 
-// caso práctico - validar email
+// Caso práctico - validar email
 let testEmail = "user@keepcoding";
 const tieneArroba = testEmail.includes("@");
 const tienePunto = testEmail.includes(".");
@@ -27,17 +28,22 @@ if (tieneArroba && tienePunto) {
   console.log('Email inválido');
 }
 
-// TRIM - elimina espacios al inicio y al final
+// ==== TRIM - elimina espacios al inicio y al final ====
 console.log(`Original: ${message}`);
 console.log(`Trim: ${message.trim()}`);
 
-// toLowerCase -> convertir a minúsculas
+// Caso práctico: limpiar input del usuario
+let username = "   ana123   ";
+console.log("Username sin limpiar:", `"${username}"`);
+console.log("Username limpio:", `"${username.trim()}"`);
+
+// ==== toLowerCase -> convertir a minúsculas ====
 console.log(message.toLowerCase());
 
 const messageClean1 = message.trim().toLowerCase();
 console.log(messageClean1);
 
-// toUpperCase -> convierte a mayúsculas
+// ==== toUpperCase -> convierte a mayúsculas ====
 const userInput = "keepcoding";
 const correctAnswer = "KeepCoding";
 
@@ -47,34 +53,36 @@ if (userInput.toUpperCase() === correctAnswer.toUpperCase()) {
   console.log("Las respuestas coinciden");
 }
 
-// charAt() -> obtener un caracter en una posición dada
+// ==== charAt() -> obtener un caracter en una posición dada ====
 let text = "Javascript";
-console.log("charAt(6):", text.charAt(6));
-console.log("charAt(0):", text.charAt(0));
+console.log("charAt(6):", text.charAt(6)); // r
+console.log("charAt(0):", text.charAt(0)); // J
 
-// indexOf -> buscar la posición de un caracter
-console.log("En coruse, la letra a", course.indexOf("Javascript"));
+// ==== indexOf -> buscar la posición de un caracter ====
+console.log("En course, buscamos Javascript:", course.indexOf("Javascript"));
 console.log(course.indexOf("Python"));
 
+// Caso práctico: verificar si existe un texto
 if (course.indexOf("Javascript") !== -1) {
   console.log("Este curso es de JS");
 }
 
-// slice() -> Extraer parte de un string, recibe dos parámetros, el inicio y final.
+
+// ==== slice() -> Extraer parte de un string, recibe dos parámetros, el inicio y final. ====
 
 // let course = "Introducción a Javascript";
-console.log("slice(0,12):", course.slice(0, 12));
-console.log("slice 17", course.slice(17));
+console.log("slice(0,12):", course.slice(0, 12)); // Introducción
+console.log("slice 15", course.slice(15)); // Javascript
 console.log("slice -10", course.slice(-10)); // -> desde el final
 
-// caso práctico, extraer un nomer de usuario de un email:
+// Caso práctico, extraer un nombre de usuario de un email:
 let email = "italo@keepcoding.io";
 
 let userName = email.slice(0, email.indexOf("@"));
 console.log(userName);
 
 
-// replace() -> reemplaza la PRIMERA ocurrencia
+// ==== replace() -> reemplaza la PRIMERA ocurrencia ====
 let greeting = "Hello World";
 console.log(greeting);
 
@@ -84,11 +92,11 @@ console.log(greetingReplace);
 const repeated = "hello hello hello";
 console.log(repeated.replace("hello", "hi"));
 
-// todas las ocurrencias
+// Para reemplazar todas las ocurrencias usamos replaceAll()
 console.log(repeated.replaceAll("hello", "hi"));
 
 
-// Encadenar métodos:
+// ==== Encadenar métodos: ====
 let result = "  Javascript es alucinante!  "
   .trim()
   .toUpperCase()
@@ -100,6 +108,41 @@ console.log(result);
 const parseAge = parseInt("36");
 console.log(parseAge);
 
+
+// También se puede parsear a número asi:
+// const parseAge = Number(promptAge ?? 0);
+// const parseAge = +promptAge ?? 0;
+
+
+// ============================================
+// ERRORES COMUNES
+// ============================================
+
+// ERROR 1: Olvidar que los strings son inmutables
+let original = "hello";
+original.toUpperCase();
+console.log("original después de toUpperCase():", original); // Sigue siendo "hello"
+
+// CORRECTO: Asignar el resultado
+let upper = original.toUpperCase();
+console.log("upper:", upper); // "HELLO"
+
+// ERROR 2: Confundir indexOf con includes
+let phrase = "Learning JavaScript";
+// indexOf retorna número, no boolean
+if (phrase.indexOf("Java")) { // Esto siempre es true (retorna 9)
+  console.log("Esto SIEMPRE se ejecuta (indexOf retorna 9, que es truthy)");
+}
+
+// CORRECTO
+if (phrase.indexOf("Java") !== -1) {
+  console.log("Forma correcta con indexOf");
+}
+
+// O mejor aún
+if (phrase.includes("Java")) {
+  console.log("Forma más clara con includes");
+}
 
 // EJERCICIO PARA EL FINDE
 // === Conversor y analizador de texto
@@ -127,3 +170,4 @@ let textoLimpio = // COMPLETAR
 
 // 6️. Tiene más de 20 caracteres?
 // COMPLETAR
+
