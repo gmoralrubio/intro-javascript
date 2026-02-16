@@ -152,9 +152,9 @@ console.log("\nEJERCICIO CASA - Analizador de texto");
 let texto = "   Me gusta aprender JavaScript cada día   ";
 
 // 1. Eliminar espacios
-let textoLimpio = // COMPLETAR
+// let textoLimpio = // COMPLETAR
 
-  console.log("Texto limpio:", textoLimpio);
+// console.log("Texto limpio:", textoLimpio);
 
 // 2. Mostrar en mayúsculas
 // COMPLETAR
