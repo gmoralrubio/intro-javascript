@@ -316,3 +316,81 @@ const usuario = "Carlos";
     console.log("Acceso denegado")
   }
 })(usuario);
+
+console.clear();
+// EJERCICIO MINI-VALIDADOR RESERVA HOTEL
+/*
+Vamos a crear un sistema sencillo para validar una reserva de hotel.
+
+Un cliente quiere reservar una habitación y debemos comprobar:
+
+Su nombre
+
+Número de noches
+
+Precio por noche
+
+Si tiene código de descuento
+*/
+
+// Nombre: validar que sea mayor de 3 caracteres y que no sea vacío
+// Número de noches: mayor de 0
+// Precio por noche: mayor de 0
+// Código de descuento, si existe y es DESC10, aplicar un 10% descuento al precio total
+
+const nombre = "Laura";
+const noches = 3;
+const precioPorNoche = 100;
+const codigoDescuento = "DESC10";
+
+function validarNombre(nombre) {
+  return nombre.trim().length >= 3;
+}
+
+function validarNoches(noches) {
+  return noches > 0;
+}
+
+function validarPrecio(precio) {
+  return precio > 0;
+}
+
+function calcularTotalHotel(noches, precio) {
+  return noches * precio;
+}
+
+function aplicarDescuento(total, codigo) {
+
+  if (codigo === "DESC10") {
+    return total * 0.9;
+  }
+
+  return total;
+}
+
+function procesarReserva(nombre, noches, precio, codigo) {
+
+  if (!validarNombre(nombre)) {
+    console.log("Nombre inválido");
+    return;
+  }
+
+  if (!validarNoches(noches)) {
+    console.log("Número de noches inválido");
+    return;
+  }
+
+  if (!validarPrecio(precio)) {
+    console.log("Precio inválido");
+    return;
+  }
+
+  let total = calcularTotalHotel(noches, precio);
+  total = aplicarDescuento(total, codigo);
+
+  console.log(`Reserva confirmada para ${nombre}`);
+  console.log(`Total a pagar: ${total}`);
+}
+
+
+procesarReserva(nombre, noches, precioPorNoche, codigoDescuento)
