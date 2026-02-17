@@ -170,3 +170,44 @@ if (hasDanger) {
 } else {
   console.log("Producto seguro para este usuario");
 }
+
+console.clear();
+
+// ARRAYS BIDIMENSIONALES
+// Son como una tabla o matriz. O una hoja Excel (visualmente)
+// Lista de lista o array de arrays
+
+/**
+ * [ 5 8 3 ]
+ * [ 1 4 5 ]
+ * [ 8 8 0 ]
+ */
+
+const cinema = [
+  ["A1", "A2", "A3", "A4"],
+  ["B1", "B2", "B3", "B4"],
+  ["C1", "C2", "C3", "C4"]
+];
+
+console.log(cinema);
+console.log("Fila1:", cinema[0]);
+console.log("Asiento A1:", cinema[0][0]);
+console.log("Asiento B3:", cinema[1][2]);
+
+const ticTacToe = [
+  ["X", "O", "X"],
+  ["O", "X", "O"],
+  ["O", "X", "X"],
+];
+
+// Modificar datos
+const seatStatus = [
+  ["libre", "libre", "libre"],
+  ["libre", "libre", "ocupado"],
+  ["ocupado", "libre", "libre"],
+];
+
+console.log("Estado antes:", seatStatus[1][1]);
+seatStatus[1][1] = "ocupado";
+console.log("Estado después:", seatStatus[1][1]);
+console.log(seatStatus[1])
