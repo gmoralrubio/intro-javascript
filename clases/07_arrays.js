@@ -210,4 +210,35 @@ const seatStatus = [
 console.log("Estado antes:", seatStatus[1][1]);
 seatStatus[1][1] = "ocupado";
 console.log("Estado después:", seatStatus[1][1]);
-console.log(seatStatus[1])
+console.log(seatStatus[1]);
+
+
+// Suma los elementos y calcula la media de cada estudiante. Imprímelo por consola.
+let notas = [
+  [8, 7, 9],
+  [6, 5, 7],
+  [10, 9, 8]
+];
+
+// === ARRAYS MULTIDIMENSIONALES
+
+const building = [
+  // Piso 0 
+  [
+    ["Desk0-0-0", "Desk0-0-1", "Desk0-0-2", "Desk0-0-3"],
+    ["Desk0-1-0", "Desk0-1-1", "Desk0-1-2", "Desk0-1-3"],
+  ],
+  // Piso 1
+  [
+    ["Desk1-0-0", "Desk1-0-1", "Desk1-0-2", "Desk1-0-3"],
+    ["Desk1-1-0", "Desk1-1-1", "Desk1-1-2", "Desk1-1-3"],
+  ],
+  // Piso 3
+  [
+    ["Desk2-0-0", "Desk2-0-1", "Desk2-0-2", "Desk2-0-3"],
+    ["Desk2-1-0", "Desk2-1-1", "Desk2-1-2", "Desk2-1-3"],
+  ]
+];
+
+console.log("Planta 1, Ofician 0, Escritorio 3", building[1][0][2]);
+
