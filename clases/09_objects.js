@@ -245,3 +245,98 @@ for (let key in data) {
 console.log(`Strings: ${strings}`);
 console.log(`Numbers: ${numbers}`);
 console.log(`Booleans: ${booleans}`);
+
+//  CONTEXTO:
+// "Trabajas en una app de gestión de un taller de coches.
+// "Necesitas modelar los datos de los vehículos que entran al taller.
+// "Piensa en QUÉ información es importante guardar y CÓMO organizarla.
+// "PARTE 1: MODELADO DE DATOS
+// "════════════════════════════════════════════════════════════
+// "Crea un objeto que represente un coche con TODA esta información:
+// "DATOS BÁSICOS:
+// "  • Matrícula (ej: '1234-ABC')
+// "  • Marca (ej: 'Toyota')
+// "  • Modelo (ej: 'Corolla')
+// "  • Año de fabricación
+// "  • Kilómetros totales
+// "  • Color\n");
+// "DATOS DEL PROPIETARIO:
+// "  • Nombre completo
+// "  • Teléfono
+// "  • Email\n");
+// "EQUIPAMIENTO DE SEGURIDAD:
+// "  • ¿Tiene baliza V16? (sí/no)
+// "  • Si tiene baliza: ¿está homologada? (sí/no)
+// "  • Fecha de la última ITV
+
+const car3 = {
+  licensePlate: "1234-ABC",
+  brand: "Seat",
+  model: "Tarraco",
+  year: 2019,
+  kilometers: 123000,
+  owner: {
+    name: "Ítalo Ravina",
+    phone: "+34 123 345555",
+  },
+  safety: {
+    hasV16Beacon: true,
+    v16Approved: true,
+    lastITV: "2025-03-15"
+  },
+  tires: {
+    frontLeft: 2.2,
+    frontRight: 2.2,
+    backLeft: 1.7,
+    backRight: 2.0
+  }
+}
+
+// Puede exister array de objetos
+const workStation = [
+  {
+    licensePlate: "1234-ABC",
+    brand: "Seat",
+    model: "Tarraco",
+    year: 2019,
+    kilometers: 123000,
+    owner: {
+      name: "Ítalo Ravina",
+      phone: "+34 123 345555",
+    },
+    safety: {
+      hasV16Beacon: true,
+      v16Approved: true,
+      lastITV: "2025-03-15"
+    },
+    tires: {
+      frontLeft: 2.2,
+      frontRight: 2.2,
+      backLeft: 1.7,
+      backRight: 2.0
+    }
+  },
+  {
+    licensePlate: "5432-KFC",
+    brand: "Toyota",
+    model: "Corolla",
+    year: 2015,
+    kilometers: 50000,
+    owner: {
+      name: "Jane Doe",
+      phone: "+34 6665 345555",
+    },
+    safety: {
+      hasV16Beacon: true,
+      v16Approved: false,
+      lastITV: "2024-01-01"
+    },
+    tires: {
+      frontLeft: 2.0,
+      frontRight: 1.8,
+      backLeft: 1.5,
+      backRight: 2.0
+    }
+  },
+  //
+];
