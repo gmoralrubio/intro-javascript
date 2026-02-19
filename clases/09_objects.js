@@ -293,50 +293,166 @@ const car3 = {
 }
 
 // Puede exister array de objetos
-const workStation = [
+const tallerCoches = [
   {
     licensePlate: "1234-ABC",
-    brand: "Seat",
-    model: "Tarraco",
+    brand: "Toyota",
+    model: "Corolla",
     year: 2019,
-    kilometers: 123000,
+    kilometers: 45000,
     owner: {
-      name: "Ítalo Ravina",
-      phone: "+34 123 345555",
+      name: "Ana García",
+      phone: "+34 612 345 678"
     },
     safety: {
       hasV16Beacon: true,
       v16Approved: true,
-      lastITV: "2025-03-15"
+      lastITV: "2024-01-10"  // caducada (más de 1 año)
     },
     tires: {
       frontLeft: 2.2,
       frontRight: 2.2,
-      backLeft: 1.7,
-      backRight: 2.0
-    }
+      rearLeft: 1.7,
+      rearRight: 2.0
+    },
+    visits: [
+      { date: "2024-01-10", service: "ITV", cost: 45, description: "ITV pasada con éxito" },
+      { date: "2024-06-20", service: "Cambio de aceite", cost: 80, description: "Aceite 5W30 + filtro" }
+    ]
   },
   {
-    licensePlate: "5432-KFC",
-    brand: "Toyota",
-    model: "Corolla",
-    year: 2015,
-    kilometers: 50000,
+    licensePlate: "5678-XYZ",
+    brand: "Ford",
+    model: "Focus",
+    year: 2017,
+    kilometers: 98000,
     owner: {
-      name: "Jane Doe",
-      phone: "+34 6665 345555",
+      name: "Carlos López",
+      phone: "+34 699 876 543"
+    },
+    safety: {
+      hasV16Beacon: false,
+      v16Approved: false,
+      lastITV: "2025-03-15"  // vigente
+    },
+    tires: {
+      frontLeft: 1.5,  // baja presión
+      frontRight: 2.1,
+      rearLeft: 2.0,
+      rearRight: 1.4   // baja presión
+    },
+    visits: [
+      { date: "2025-03-15", service: "Revisión general", cost: 120, description: "Frenos + ITV" }
+    ]
+  },
+  {
+    licensePlate: "9999-ZZZ",
+    brand: "Seat",
+    model: "Ibiza",
+    year: 2021,
+    kilometers: 22000,
+    owner: {
+      name: "María Torres",
+      phone: "+34 655 111 222"
     },
     safety: {
       hasV16Beacon: true,
-      v16Approved: false,
-      lastITV: "2024-01-01"
+      v16Approved: true,
+      lastITV: "2023-11-01"  // caducada (más de 1 año)
     },
     tires: {
-      frontLeft: 2.0,
-      frontRight: 1.8,
-      backLeft: 1.5,
-      backRight: 2.0
-    }
-  },
-  //
+      frontLeft: 2.3,
+      frontRight: 2.3,
+      rearLeft: 2.1,
+      rearRight: 2.2
+    },
+    visits: []
+  }
 ];
+
+console.clear();
+
+// MÉTODOS  ÚTILES DE OBJETOS
+
+const smartphone = {
+  brand: "Samsung",
+  model: "Galaxy s21",
+  storage: 256,
+  price: 799,
+}
+
+// Object.keys() -> Array de claves
+
+const keys = Object.keys(smartphone);
+console.log(keys);
+
+// Object.values() -> Array de VALORES
+const values = Object.values(smartphone);
+console.log(values);
+
+// Object.entries() -> Array de pares: clave -> valor
+const entries = Object.entries(smartphone);
+console.log(entries); // [['brand', 'Samsung,], [], []]
+
+// Caso práctico
+const student3 = {
+  name: "Pepe",
+  city: "Madrid",
+  phone: "666555444",
+  username: "pepe123",
+}
+
+delete student3.name;
+
+const studentKeys = Object.keys(student3);
+console.log("student keys", studentKeys);
+
+// caso práctico - buscar valor máximo
+const prices = {
+  laptop: 999,
+  mouse: 25,
+  keyboard: 75,
+  monitor: 1500
+}
+
+console.log(prices);
+
+const priceValues = Object.values(prices);
+console.log(priceValues);
+
+let maxPrice = priceValues[0];
+for (let price of priceValues) {
+
+  if (price > maxPrice) {
+    maxPrice = price
+  }
+}
+
+console.log(`Precio máximo ${maxPrice}`);
+console.clear();
+// Caso práctico - Filtrar propiedades por tipo:
+const stats = {
+  name: "Player1",
+  level: 10,
+  score: 1500,
+  role: "warrior",
+  health: 100,
+  mana: 50,
+};
+
+
+console.log(stats);
+
+const numericStats = {};
+
+for (let [key, value] of Object.entries(stats)) {
+
+  if (typeof value === "number") {
+    numericStats[key] = value;
+  }
+
+}
+
+// numericStats["killers"] = 12;
+
+console.log(numericStats);
