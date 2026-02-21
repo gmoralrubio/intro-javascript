@@ -68,7 +68,7 @@ if (course.indexOf("Javascript") !== -1) {
 }
 
 
-// ==== slice() -> Extraer parte de un string, recibe dos parámetros, el inicio y final. ====
+// ==== slice() -> Extraer parte de un string ====
 
 // let course = "Introducción a Javascript";
 console.log("slice(0,12):", course.slice(0, 12)); // Introducción
@@ -171,3 +171,32 @@ let texto = "   Me gusta aprender JavaScript cada día   ";
 // 6️. Tiene más de 20 caracteres?
 // COMPLETAR
 
+// ==== SOLUCIÓN ====
+
+// Eliminar espacios
+let textoLimpio = texto.trim();
+
+console.log("Texto limpio:", textoLimpio);
+
+// Mayúsculas
+console.log("Mayúsculas:", textoLimpio.toUpperCase());
+
+// Minúsculas
+console.log("Minúsculas:", textoLimpio.toLowerCase());
+
+//  Contiene "javascript"
+if (textoLimpio.toLowerCase().includes("javascript")) {
+  console.log("✅ El texto contiene la palabra 'javascript'");
+} else {
+  console.log("❌ El texto no contiene la palabra 'javascript'");
+}
+
+//  Primeros 5 caracteres
+console.log("Primeros 5 caracteres:", textoLimpio.slice(0, 5));
+
+//  Longitud mayor de 20
+if (textoLimpio.length > 20) {
+  console.log("El texto tiene más de 20 caracteres");
+} else {
+  console.log("El texto tiene 20 caracteres o menos");
+}

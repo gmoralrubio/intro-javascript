@@ -1,7 +1,9 @@
+// ============================================
+// MUTABILIDAD, SPREAD Y DESTRUCTURING
+// ============================================
 console.log("mutability");
 
 // Mutabilidad
-
 // Tipo de datos primitivos: son INMUTABLES (no se pieden cambiar);
 
 let x = 10;
@@ -15,7 +17,7 @@ console.log("x:", x);
 console.log("y:", y);
 
 
-// MUTABILIDAD EN ARRAYS -> si son mutables, apunta al mismo array
+// MUTABILIDAD EN ARRAYS -> si son mutables, apunta al MISMO array
 
 const arr1 = [1, 2, 3];
 const arr2 = arr1; // No copia el array, sino que crea una REFERENCIA (apunta al mismo array);
@@ -29,7 +31,7 @@ console.log("arr1", arr1);
 console.log("arr2", arr2);
 
 
-// Objetos tambien  trabajan por referencia
+// Objetos tambien trabajan por referencia (MUTABLES)
 const obj1 = { name: "Miriam", age: 37 };
 const obj2 = obj1;
 
@@ -39,8 +41,9 @@ console.log("obj1", obj1);
 console.log("obj2", obj2);
 
 console.clear();
-// caso práctico - bug
 
+
+// CASO PRÁCTICO: Bug común
 const cartOriginal = [
   { name: "laptop", price: 999 },
   { name: "mouse", price: 25 },
@@ -60,29 +63,27 @@ console.log("carrito original", cartOriginal);
 console.log("carrito descuento", cartDiscount);
 
 
-// INMUTABILIDAD - Object.freeze();
+// INMUTABILIDAD DE UN OBJETO - MÉTODO ÚTIL
 
 const user = {
   name: "Ana",
   age: 30,
 };
 
-user.age = 31;
-user.city = "Madrid";
+user.age = 31; // Se puede modificar
+user.city = "Madrid"; // Se puede añadir
+// delete user.name; // Se puede eliminar
 
-// delete user.name;
-
-// console.log(user);
-
+// console.log(user); // ha cambiado
 Object.freeze(user);
 
-user.age = 32;
-user.city = "Zaragoza";
-delete user.name;
+user.age = 32; // No cambia
+user.city = "Zaragoza"; // No se añade
+delete user.name; // No se elimina
 
 console.log(user);
 
-// Object freeze es superficial
+// Object.freeze es superficial, es decir si un objeto tiene objetos dentro, estos si mutan:
 const car = {
   brand: "Seat",
   owner: {
@@ -100,7 +101,9 @@ console.log(car);
 console.clear();
 
 
-// ====== SPREAD OPERATOR ===== sintaxis -> ...
+// ============================================
+//  SPREAD OPERATOR (...)
+// ============================================
 
 // SPREAD EN ARRAYS -> crea copias
 const original = [1, 2, 3];
@@ -109,7 +112,7 @@ const copy = [...original]; // copia del array original
 console.log(original);
 console.log(copy);
 
-copy.push(4);
+copy.push(4); // Modificar la copia
 
 console.log(original);
 console.log(copy);
@@ -169,7 +172,95 @@ console.log(copyCart);
 
 console.clear();
 
-// === DESCRUCTURING: -> EXTRAER VALORES O ELEMENTOS DE UNA FORMA MÁS ELEGANTE
+
+// EXPANDIR arrays
+const arr3 = [1, 2, 3];
+const arr4 = [4, 5, 6];
+
+// Combinar arrays
+const combined = [...arr3, ...arr4];
+console.log("Combinado:", combined); // [1, 2, 3, 4, 5, 6]
+
+// Añadir elementos al principio y al final
+const withExtras = [0, ...arr3, 999];
+console.log("Con extras:", withExtras); // [0, 1, 2, 3, 999]
+
+// CASO PRÁCTICO: Añadir items sin modificar original
+const todoList = ["Estudiar", "Hacer ejercicio"];
+console.log("Lista original:", todoList);
+
+// MAL: Modifica el original
+// todoList.push("Cocinar");
+
+// BIEN: Crear nueva lista
+const newTodoList = [...todoList, "Cocinar"];
+console.log("Lista original:", todoList);    // No cambió
+console.log("Nueva lista:", newTodoList);     // Con el item nuevo
+
+// EXPANDIR objetos
+const defaults = {
+  theme: "light",
+  language: "en",
+  notifications: true
+};
+
+const userPrefs = {
+  theme: "dark",
+  fontSize: 16
+};
+
+// Combinar objetos (las propiedades de userPrefs sobrescriben defaults)
+const finalConfig = { ...defaults, ...userPrefs };
+console.log("Config final:", finalConfig);
+// { theme: "dark", language: "en", notifications: true, fontSize: 16 }
+
+// CASO PRÁCTICO: Actualizar producto sin mutarlo
+const product = {
+  id: 1,
+  name: "Laptop",
+  price: 999,
+  stock: 10
+};
+
+console.log("Producto original:", product);
+
+// MAL: Mutar directamente
+// product.stock = product.stock - 1;
+
+// BIEN: Crear nuevo objeto con cambios
+const updatedProduct = {
+  ...product,
+  stock: product.stock - 1,
+  lastUpdate: "2026-01-17"
+};
+
+console.log("Producto original:", product);    // No cambió
+console.log("Producto actualizado:", updatedProduct); // Con cambios
+
+// CASO PRÁCTICO: Merge de configuraciones
+const serverConfig = {
+  host: "localhost",
+  port: 3000,
+  secure: false
+};
+
+const productionOverrides = {
+  host: "api.example.com",
+  secure: true,
+  ssl: {
+    cert: "/path/to/cert",
+    key: "/path/to/key"
+  }
+};
+
+const prodConfig = { ...serverConfig, ...productionOverrides };
+console.log("Configuración de producción:", prodConfig);
+
+
+
+// ============================================
+// 3. DESTRUCTURING - Extraer valores o elementos de una forma más elegante
+// ============================================
 
 // No modifica el array o el objeto
 
@@ -199,8 +290,27 @@ const coord = [10, 20];
 const [x2, y2] = coord;
 console.log(`Coordenadas: x= ${x2}, y = ${y2}`);
 
-// Desctructurting de objetos"
 
+// CASO PRÁCTICO: Funciones que retornan arrays
+function getMinMax(numbers) {
+  let min = numbers[0];
+  let max = numbers[0];
+
+  for (let num of numbers) {
+    if (num < min) min = num;
+    if (num > max) max = num;
+  }
+
+  return [min, max];
+}
+
+const valores = [5, 2, 9, 1, 7];
+const [minimo, maximo] = getMinMax(valores);
+
+console.log(`Mínimo: ${minimo}, Máximo: ${maximo}`);
+
+
+// DESTRUCTURING DE OBJETOS
 const user4 = {
   username: "ana_dev",
   email: "ana@example.com",
@@ -208,6 +318,7 @@ const user4 = {
   city: "Madrid",
 };
 
+// Forma tradicional
 const username4 = user4.username;
 console.log(username4);
 
@@ -243,10 +354,12 @@ const fullUser = {
 const { password, ...tutu } = fullUser;
 
 console.log(`Password extraída: ${password}`);
-console.log("Datos públicos:", tutu);
+console.log("Datos públicos:", tutu); // Sin password
 
-console.clear()
-  ;// destructuring anidado:
+console.clear();
+
+
+// CASO PRÁCTICO: Extraer datos anidados
 const car45 = {
   brand: "Toyota",
   model: "Corolla",
@@ -262,7 +375,7 @@ const car45 = {
 
 const nameNormal = car45.owner.name;
 
-
+// destructuring anidado:
 let {
   brand,
   owner: { name: ownerName, phone },
@@ -277,3 +390,85 @@ console.log("Propietario:", ownerName);
 console.log(`Año: ${year}`);
 
 console.log(car45);
+
+
+// ============================================
+// 4. PROBLEMAS COMUNES Y SOLUCIONES
+// ============================================
+
+// PROBLEMA 1: Copia superficial
+const userData = {
+  name: "Ana",
+  address: {
+    city: "Madrid",
+    street: "Gran Vía"
+  }
+};
+
+const userCopy = { ...userData }; // Copia superficial
+
+userCopy.address.city = "Barcelona"; // Modificar objeto anidado
+
+console.log("Original:", userData);      // City cambió a Barcelona
+console.log("Copia:", userCopy);
+
+//SOLUCIÓN: Copia profunda manual
+const userCopy2 = {
+  ...userData,
+  address: { ...userData.address } // Copiar objeto anidado también
+};
+
+userCopy2.address.city = "Valencia";
+
+console.log("Original:", userData);      // Sigue siendo Madrid
+console.log("Copia profunda:", userCopy2); // Valencia
+
+// PROBLEMA 2: Arrays de objetos
+const students = [
+  { name: "Ana", grade: 85 },
+  { name: "Carlos", grade: 90 }
+];
+
+const studentsCopy = [...students]; // Copia el array, pero...
+
+studentsCopy[0].grade = 95; // Los objetos dentro son referencias
+
+console.log("Original:", students);      // Grade de Ana cambió
+console.log("Copia:", studentsCopy);
+
+// SOLUCIÓN: Copiar objetos también
+const studentsCopy2 = students.map(student => ({ ...student }));
+
+studentsCopy2[0].grade = 100;
+
+console.log("Original:", students);      // No cambió
+console.log("Copia correcta:", studentsCopy2); // Cambió solo la copia
+
+// PROBLEMA 3: Pasar objetos a funciones
+
+function addDiscount(product) {
+  product.price = product.price * 0.9; // Muta el original
+  return product;
+}
+
+const originalProduct = { name: "Laptop", price: 1000 };
+const discountedProduct = addDiscount(originalProduct);
+
+console.log("Original:", originalProduct);      // Cambió
+console.log("Con descuento:", discountedProduct);
+
+// No mutar, retornar nuevo objeto
+
+function addDiscountSafe(product) {
+  return {
+    ...product,
+    price: product.price * 0.9 // Crear nuevo objeto
+  };
+}
+
+const originalProduct2 = { name: "Mouse", price: 100 };
+const discountedProduct2 = addDiscountSafe(originalProduct2);
+
+console.log("Original:", originalProduct2);      // No cambió
+console.log("Con descuento:", discountedProduct2);
+

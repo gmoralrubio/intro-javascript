@@ -1,18 +1,37 @@
 console.log("Funciones");
 
+// ============================================
+// FUNCIONES EN JAVASCRIPT
+// ============================================
+
+
 // Declaración de funciones
-/**
- * function nombreDeFunción(){
- * // Código...
- * }
+/*
+  function nombreDeFunción(){
+  // Código...
+  }
  */
+
+// CASO PRÁCTICO: Sistema de saludos en una app
 function saludo() {
   console.log("Hola y bienvenido a Keepcoding");
 }
 
-saludo();
+saludo(); // Mostrar mensaje de bienvenida cuando el usuario entra
 
-// Parámetros
+// En una app real, esto se ejecutaría cuando:
+// - El usuario inicia sesión
+// - Se carga la página principal
+// - Se abre un modal de bienvenida
+
+
+
+// ============================================
+// 2. PARÁMETROS Y ARGUMENTOS
+// ============================================
+
+
+// CASO PRÁCTICO: Personalizar mensajes de bienvenida
 function saludarUsuario(nombre) {
   console.log(`Hola, ${nombre}, bienvenido!!`);
 }
@@ -21,7 +40,7 @@ saludarUsuario("Alicia");
 saludarUsuario("Zoe");
 saludarUsuario("Guille");
 
-// Calcular precio con descuento
+// CASO PRÁCTICO: Calcular precio con descuento
 function calcularDescuento(precio, descuento) {
 
   if (descuento === 100) {
@@ -38,33 +57,40 @@ calcularDescuento(100, 10);
 calcularDescuento(100, 25);
 calcularDescuento(95, 100);
 
-// === Return ===
 
-// mal:
+
+// ============================================
+// 3. RETURN - Devolver valores
+// ============================================
+
+// MAL: Solo muestra, no podemos usar el resultado
 function mostrarTotal(precio, cantidad) {
   console.log(precio * cantidad);
 }
 
-mostrarTotal(10, 3);
+mostrarTotal(10, 3); // Muestra 30
 
-let invoice1 = mostrarTotal(10, 3);
-console.log("invoice1", invoice1);
+let invoice1 = mostrarTotal(10, 3); // Muestra 30, pero invoice1 es undefined
+console.log("invoice1", invoice1); // undefined - No podemos hacer nada con esto
 
-// bien:
+
+// BIEN: Retorna el valor para poder usarlo
 function calcularTotal(precio, cantidad) {
   return precio * cantidad;
 }
 
 let invoice2 = calcularTotal(10, 3);
-console.log("invoice2", invoice2);
+console.log("invoice2", invoice2); // 30
 
+// Ahora podemos usar el resultado en operaciones más complejas
 let subtotal = calcularTotal(10, 3);
 let tax = subtotal * 0.21;
 let total = subtotal + tax;
 
 console.log(`Subtotal: ${subtotal} €. Tax: ${tax.toFixed(2)}. Total: ${total.toFixed(2)}`);
 
-// verificador de contraseña:
+
+// CASO PRÁCTICO: Sistema de autenticación
 // comprobar que la contraseña tenga longitud mínima 8 caracteres, tenga números del 0 al 9, que contenga mayúscula
 
 function comprobarPassword(password) {
@@ -84,6 +110,7 @@ function comprobarPassword(password) {
   }
 
   // 3. Verificar si contine mayúsculas
+  // Truco: si el password es diferente a su versión en minúsculas, significa que tiene al menos una mayúscula
   const hasUpperCase = password !== password.toLowerCase();
 
   if (!hasUpperCase) {
@@ -99,35 +126,50 @@ console.log(comprobarPassword("abcdefgh1"));
 console.log(comprobarPassword("Abcdefgh1"));
 
 
+// Return vacío:
+/*
+Un "return vacío" es simplemente:
+
+return;
+
+Sin devolver ningún valor.
+
+Sirve para:
+- Salir inmediatamente de la función.
+- Detener su ejecución.
+*/
+
 // Early return: salida temprana de una función
 function ejemploVacio() {
   console.log("Paso 1");
 
   return;
-  console.log("Paso 2");
+  console.log("Paso 2"); // Nunca se ejecuta
 }
 
 ejemploVacio();
 
+// Esto evita realizar else innecesarios
 function validarEdad(edad) {
   if (edad < 18) {
     console.log("Eres menor de edad");
-    return;
+    return; // Salimos inmediatamente
   }
 
   console.log("Puedes continuar");
 }
+
 validarEdad(15);
 validarEdad(25);
 
-// para evitar if encadenados:
+// para evitar if encadenados: Se trata de una salida temprana (early return) de una función
 function procesarPago(cantidad) {
 
   let mensaje;
 
   if (cantidad <= 0) {
     mensaje = "Cantidad inválida";
-    return mensaje;
+    return mensaje; // Cortamos ejecución
   }
 
   if (cantidad > 1000) {
@@ -142,11 +184,18 @@ console.log(procesarPago(0));
 console.log(procesarPago(3000));
 console.log(procesarPago(400));
 
-// Es más limpio, reduce anidaciones if...else if...else. Mejora la legibilidad del código
+// Es más limpio
+// Reduce anidaciones if...else if...else if...else
+// Hace el código más legible
 
 console.clear();
-// === SCOPE (ÁMBITO) de una función:
 
+
+// ============================================
+// 4. SCOPE (ÁMBITO)
+// ============================================
+
+// CASO PRÁCTICO: Configuración global de una app
 let appName = "Plataforma Keepcoding";
 let maxLoginAttempts = 3;
 
@@ -157,44 +206,67 @@ function showAppInfo() {
 
 showAppInfo();
 
-// contador de intentos de sesión con variable local
-let attemtps = 0; // Variable global está fuera de la propia función
-
+// CASO PRÁCTICO: Contador de intentos de login (variable local)
 function validarLogin(username, password) {
-
+  let attempts = 0; // Variable LOCAL - cada ejecución tiene su propio contador (pasar arriba para que s vea el efecto), luego volver a pasar aqui para hacer el ejemplo de abajo
   let correctPassword = "secret123";
 
-  attemtps++;
-
-  // early return:
-  if (attemtps > maxLoginAttempts) {
-    return "Cuenta bloqueada - demasiados intentos"
-  }
+  attempts++;
 
   if (password === correctPassword) {
-    return `Bienvenido ${username}, intentos de login ${attemtps}`
+    return `Welcome ${username}! (Attempt ${attempts})`;
   } else {
-    return `Contraseña incorrecta, intentos de login: ${attemtps}`
+    return `Wrong password (Attempt ${attempts})`;
   }
 }
 
-console.log(validarLogin("Miriam", "wrong1"));
-console.log(validarLogin("Miriam", "wrong2"));
-console.log(validarLogin("Miriam", "wrong3"));
-console.log(validarLogin("Miriam", "secret123"));
+console.log("\nLogin attempts:");
+console.log(validarLogin("Ana", "wrong"));     // Attempt 1
+console.log(validarLogin("Ana", "wrong2"));    // Attempt 1 (se reinicia!)
+console.log(validarLogin("Ana", "secret123")); // Attempt 1 (se reinicia!)
 
+
+// ⚠️ PROBLEMA: attempts se reinicia cada vez
+// Solución: usar una variable global o closure (lo veremos después)
+
+// CASO PRÁCTICO: Contador global persistente
+let sessionAttempts = 0;
+
+function validarLoginGlobal(username, password) {
+  let correctPassword = "secret123";
+
+  sessionAttempts++; // Modifica la variable GLOBAL
+
+  // Esto se llama early return:
+  if (sessionAttempts > maxLoginAttempts) {
+    return "Account locked - too many attempts";
+  }
+
+  if (password === correctPassword) {
+    return `Welcome ${username}! (Total attempts: ${sessionAttempts})`;
+  } else {
+    return `Wrong password (Attempt ${sessionAttempts} of ${maxLoginAttempts})`;
+  }
+}
 console.clear();
 
-// === FUNCIONES DE TIPO FLECHA ===
-// Forma más moderna y más corta de escribir funciones
 
-/**
- * Sintaxis básica:
- * 
- * (parámetros) => {
- *  código
- * }
- */
+// ============================================
+// 5. FUNCIONES FLECHA (Arrow Functions)
+// ============================================
+
+/*Las funciones flecha son una forma más moderna y corta
+de escribir funciones en JavaScript.
+
+Sintaxis básica:
+
+(parametros) => {
+  // código
+}
+
+Se introdujeron en ES6.
+*/
+
 
 function saludarTradicional(nombre) {
   return "Hola " + nombre;
@@ -202,21 +274,33 @@ function saludarTradicional(nombre) {
 
 console.log(saludarTradicional("Pepe"));
 
-// flecha:
+// quitamos la palabr function, añadimos =>, la guardamos normalmente en una variable.
+// Función flecha equivalente
 const saludarFlecha = nombre => {
   return "Hola " + nombre;
 }
 
 console.log(saludarFlecha("Juanito"));
 
-// return automático:
+// Los paréntesis son opcionales si solo hay un parámetro
+const saludarSimple = nombre => {
+  return "Hola " + nombre;
+};
+
+console.log(saludarSimple("Carlos"));
+
+
+// Podemos quitar las llaves
+// Y el return se hace automático (implícito)
+
 const sumar = (a, b) => a + b;
 
-console.log(sumar(10, 5));
+console.log(sumar(5, 3));
 
+// Sin parámetros, los paréntesis son OBLIGATORIOS
 const mostrarMensaje = () => {
-  console.log("Hola Mundo");
-}
+  console.log("Hola mundo");
+};
 
 mostrarMensaje();
 
@@ -286,13 +370,93 @@ console.log(esPar(4));
 
 console.clear();
 
-// IIFE => Inmediately Invoked Function Expression
-// Es una función que se define y se ejecuta inmediatamente
 
-// Sintaxis básica:
-/**
- * ( function(){} )();
- */
+// ============================================
+// 6. FUNCIONES COMO VALORES - Una función puede guardarse en una variable y como tal, podemos pasarla como parámetro a otra función
+// ============================================
+
+console.log("\n--- 6. FUNCIONES COMO VALORES ---");
+
+
+// Función como parámetro:
+const decirHola = () => {
+  return "Hola";
+};
+
+console.log(decirHola);   // Muestra la función
+console.log(decirHola()); // Ejecuta la función
+
+// Entonces, esta función recibe otra, y la ejecuta:
+function ejecutarAccion(accion) {
+  accion();
+}
+
+const saludarParam = () => {
+  console.log("Hola!");
+};
+
+const despedirParam = () => {
+  console.log("Adiós!");
+};
+
+ejecutarAccion(saludarParam);
+ejecutarAccion(despedirParam);
+
+// También podemos pasarle parámetros:
+function ejecutarOperacion(numero, operacion) {
+  return operacion(numero);
+}
+
+const duplicar = numero => numero * 2;
+const triplicar = numero => numero * 3;
+
+console.log(ejecutarOperacion(5, duplicar));   // 10
+console.log(ejecutarOperacion(5, triplicar));  // 15
+
+
+// CASO PRÁCTICO: Sistema de notificaciones con diferentes tipos
+const enviarEmail = mensaje => {
+  console.log("Sending email:", mensaje);
+};
+
+const enviarSMS = mensaje => {
+  console.log("Sending SMS:", mensaje);
+};
+
+function enviarNotificacion(tipo, mensaje) {
+
+  if (tipo === "email") {
+    enviarEmail(mensaje);
+  } else if (tipo === "sms") {
+    enviarSMS(mensaje);
+  } else {
+    console.log("❌ Unknown type");
+  }
+}
+
+
+console.log("\nNotification system:");
+enviarNotificacion("email", "Welcome to Keepcoding!");
+enviarNotificacion("sms", "Your code is 1234");
+enviarNotificacion("push", "New message received");
+
+/*
+========================================
+IIFE (Immediately Invoked Function Expression)
+========================================
+
+IIFE significa:
+Immediately Invoked Function Expression
+
+Es una función que:
+1. Se define
+2/ Se ejecuta inmediatamente
+
+Sintaxis básica:
+(function() {
+  // código
+})();
+*/
 
 // No hace falta llamarla, se ejecuta en el momento que se define
 (function () {
@@ -318,6 +482,8 @@ const usuario = "Carlos";
 })(usuario);
 
 console.clear();
+
+
 // EJERCICIO MINI-VALIDADOR RESERVA HOTEL
 /*
 Vamos a crear un sistema sencillo para validar una reserva de hotel.
@@ -393,4 +559,4 @@ function procesarReserva(nombre, noches, precio, codigo) {
 }
 
 
-procesarReserva(nombre, noches, precioPorNoche, codigoDescuento)
+procesarReserva(nombre, noches, precioPorNoche, codigoDescuento);

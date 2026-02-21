@@ -1,12 +1,19 @@
+// ============================================
+// OBJETOS EN JAVASCRIPT - LIVE CODING
+// ============================================
 console.log("Objetos");
 
-// Son colecciones de datos relacios
-// Es una ficha de algo
 
-// Un objeto almacena información usand pares clave-valor
+// Los objetos son colecciones de datos relacionados
+// Piensa en ellos como "fichas" que describen algo
+
+// Un objeto almacena información usando pares clave-valor
 // Clave (propiedad): el nombre de la información
 // Valor: el dato en sí
 
+
+// COMPARACIÓN: Array vs Objeto
+// Array: lista ordenada por posición
 const personArray = ["Ana", 25, "Madrid", "Developer"];
 
 // Datos más organizados por propiedades
@@ -23,6 +30,7 @@ console.log("Edad:", personObject.age);
 console.log("Food:", personObject.food); // undefined
 
 
+// CASO PRÁCTICO: Producto en una tienda
 const product = {
   id: 1001,
   name: "laptop",
@@ -31,9 +39,20 @@ const product = {
   stock: 16,
   available: true,
 };
+console.log("\nProducto:");
+console.log(product);
 
-// objeto vacío
+
+// ============================================
+// 2. CREAR OBJETOS - Notación literal
+// ============================================
+// Sintaxis: { clave: valor, clave: valor }
+
+// Objeto vacío
 const emptyObject = {};
+console.log("Objeto vacío:", emptyObject);
+
+// Pero podemos añadir propiedades al objeto
 emptyObject.price = 100;
 emptyObject.name = "Mouse";
 
@@ -54,7 +73,26 @@ const mixed = {
 
 console.log(mixed);
 
-// Formas de acceder a una propiedad
+// CASO PRÁCTICO: Tarea en una lista de tareas
+const task = {
+  id: 1,
+  title: "Estudiar JavaScript",
+  description: "Completar módulo de objetos",
+  completed: false,
+  priority: "high",
+  dueDate: "2026-01-20",
+  subtask: {
+    name: "Abrir VSCode",
+    completed: true
+  }
+};
+
+console.log("Tarea:", task);
+
+
+// ============================================
+// 3. ACCEDER A PROPIEDADES
+// ============================================
 
 const student = {
   name: "Pepe",
@@ -63,15 +101,21 @@ const student = {
   grade: 85,
 };
 
-// más común a la hora de acceder a una propiedad
-console.log(`Nombre alumno: ${student.name}`);
 
-// usando corchetes
+// MÉTODO 1: Notación de punto (más común)
+console.log(`Nombre alumno: ${student.name}`);
+console.log("Edad:", student.age);
+console.log("Curso:", student.course);
+
+
+// MÉTODO 2: Notación de corchetes
 console.log(`Nombre alumno: ${student["name"]}`);
+console.log("Edad:", student["age"]);
 
 console.log(mixed.nested);
 console.log(mixed["nested"]);
 
+// ¿Cuándo usar corchetes? Cuando la clave es dinámica o tiene caracteres especiales
 // Cuando usar uno u otro
 const restaurant = {
   name: "El Pollo loco",
@@ -84,7 +128,7 @@ const restaurant = {
   }
 };
 
-// console.log(restaurant.opening hours); //
+// console.log(restaurant.opening hours); // No funciona
 console.log(restaurant["opening hours"]);
 console.log(restaurant.opening.firstHour);
 console.log(restaurant["average-price"]);
@@ -93,9 +137,15 @@ console.log(restaurant["average-price"]);
 const propertyName = "name";
 console.log(restaurant[propertyName]);
 
+// Acceder a propiedad que no existe
+console.log("\nPropiedad inexistente:", student.phone); // undefined
+
 console.clear();
 
-// Modificar y añadir propiedades
+
+// ============================================
+// 4. MODIFICAR Y AÑADIR PROPIEDADES
+// ============================================
 
 const car = {
   brand: "Toyota",
@@ -116,8 +166,31 @@ car.electric = false;
 
 console.log("Después de añadir propiedades", car);
 
+// CASO PRÁCTICO: Actualizar stock de producto
+const item = {
+  id: 101,
+  name: "Mouse",
+  stock: 25
+};
 
-// Eliminar propiedades de un objeto - delete
+console.log("Stock inicial:", item.stock);
+
+// Vender 5 unidades
+item.stock = item.stock - 5;
+console.log("Después de vender 5:", item.stock);
+
+// Operador de asignación compuesta
+item.stock -= 3; // Vender 3 más
+console.log("Después de vender 3 más:", item.stock);
+
+// Recibir nuevos productos
+item.stock += 20;
+console.log("Después de recibir 20:", item.stock);
+
+
+// ============================================
+// 5. ELIMINAR PROPIEDADES - delete
+// ============================================
 const account = {
   username: "john_doe",
   email: "john_doe@email.com",
@@ -132,7 +205,8 @@ delete account.password;
 
 console.log("Después de eliminar", account);
 console.clear();
-// Limpiar carrito después de compra
+
+// CASO PRÁCTICO: Limpiar carrito después de compra
 const order = {
   items: ["Laptop", "Mouse"],
   total: 1025,
@@ -142,15 +216,12 @@ const order = {
 
 console.log("Compra inicial:", order);
 
+// Aplicar descuento y limpiar temporales
 order.total -= order.tempDiscount;
-
 delete order.tempDiscount;
-// order.total -= order.tempDiscount
-// delete order.tempDiscount;
-// delete order.couponCode;
+delete order.couponCode;
 
-console.log("Compra final", order);
-
+console.log("Orden final:", order);
 console.clear();
 
 const course = {
@@ -168,7 +239,11 @@ console.log(courseName);
 
 
 console.clear();
-// RECORRER OBJETOS
+
+
+// ============================================
+// 6. RECORRER OBJETOS - for...in
+// ============================================
 
 // for...in iterar sobre las CLAVES de un objeto
 
@@ -218,7 +293,8 @@ if (hasError) {
 }
 
 console.clear();
-// Contar tipos de propiedades
+
+// CASO PRÁCTICO: Contar tipos de propiedades
 const data = {
   name: "Pepe",
   age: 40,
@@ -372,7 +448,10 @@ const tallerCoches = [
 
 console.clear();
 
-// MÉTODOS  ÚTILES DE OBJETOS
+
+// ============================================
+// MÉTODOS ÚTILES DE OBJECT
+// ============================================
 
 const smartphone = {
   brand: "Samsung",
@@ -381,16 +460,16 @@ const smartphone = {
   price: 799,
 }
 
-// Object.keys() -> Array de claves
+// Object.keys() -> Obtiene array de CLAVES
 
 const keys = Object.keys(smartphone);
 console.log(keys);
 
-// Object.values() -> Array de VALORES
+// Object.values() -> Obtiene array de VALORES
 const values = Object.values(smartphone);
 console.log(values);
 
-// Object.entries() -> Array de pares: clave -> valor
+// Object.entries() -> Obtiene array de pares [clave, valor]
 const entries = Object.entries(smartphone);
 console.log(entries); // [['brand', 'Samsung,], [], []]
 
@@ -407,7 +486,8 @@ delete student3.name;
 const studentKeys = Object.keys(student3);
 console.log("student keys", studentKeys);
 
-// caso práctico - buscar valor máximo
+
+// CASO PRÁCTICO: Buscar valor máximo
 const prices = {
   laptop: 999,
   mouse: 25,
@@ -429,8 +509,27 @@ for (let price of priceValues) {
 }
 
 console.log(`Precio máximo ${maxPrice}`);
+
+
+// CASO PRÁCTICO: Convertir objeto a lista legible
+const laptop = {
+  processor: "Intel i7",
+  ram: "16GB",
+  storage: "512GB SSD",
+  screen: "15.6 pulgadas"
+};
+
+console.log("Características del laptop:");
+const characteristics = Object.entries(laptop);
+
+for (let [key, value] of characteristics) {
+  console.log(`• ${key}: ${value}`);
+}
+
 console.clear();
-// Caso práctico - Filtrar propiedades por tipo:
+
+
+// CASO PRÁCTICO: Filtrar propiedades por tipo
 const stats = {
   name: "Player1",
   level: 10,
@@ -456,3 +555,83 @@ for (let [key, value] of Object.entries(stats)) {
 // numericStats["killers"] = 12;
 
 console.log(numericStats);
+
+
+// ============================================
+// EJERCICIO PRÁCTICO INTEGRADOR
+// ============================================
+
+// Sistema de gestión de productos
+const inventory = {
+  product1: {
+    name: "Laptop",
+    price: 999,
+    stock: 10,
+    category: "electronics"
+  },
+  product2: {
+    name: "Mouse",
+    price: 25,
+    stock: 50,
+    category: "electronics"
+  },
+  product3: {
+    name: "Desk",
+    price: 200,
+    stock: 5,
+    category: "furniture"
+  },
+  product4: {
+    name: "Chair",
+    price: 150,
+    stock: 0,
+    category: "furniture"
+  }
+};
+
+console.log("Inventario completo:");
+console.log(inventory);
+
+// 1. Listar todos los productos
+for (let productId in inventory) {
+  const product = inventory[productId];
+  console.log(`${product.name} - $${product.price} (Stock: ${product.stock})`);
+}
+
+// 2. Productos sin stock
+for (let productId in inventory) {
+  const product = inventory[productId];
+  if (product.stock === 0) {
+    console.log(`• ${product.name}`);
+  }
+}
+
+// 3. Valor total del inventario
+let totalValue = 0;
+
+for (let productId in inventory) {
+  const product = inventory[productId];
+  const productValue = product.price * product.stock;
+  totalValue += productValue;
+  console.log(`${product.name}: $${product.price} × ${product.stock} = $${productValue}`);
+}
+
+console.log(`Valor total: $${totalValue}`);
+
+// 4. Productos por categoría
+const categories = {};
+
+for (let productId in inventory) {
+  const product = inventory[productId];
+  const category = product.category;
+
+  if (!categories[category]) {
+    categories[category] = [];
+  }
+
+  categories[category].push(product.name);
+}
+
+for (let category in categories) {
+  console.log(`${category}:`, categories[category]);
+}
