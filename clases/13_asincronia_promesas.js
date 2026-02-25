@@ -202,13 +202,135 @@ function pintarCochePromise() {
 
 // Encadenar las promesas (muchos más legible)
 
-ensamblarChasisPromise()
-  .then(() => instalarMotorPromise())
-  .then(() => montarRuedasPromise())
-  .then(() => pintarCochePromise())
-  .then(() => {
-    console.log("Coche completado!");
+// ensamblarChasisPromise()
+//   .then(() => instalarMotorPromise())
+//   .then(() => montarRuedasPromise())
+//   .then(() => pintarCochePromise())
+//   .then(() => {
+//     console.log("Coche completado!");
+//   })
+//   .catch(error => {
+//     console.log("Error:", error);
+//   })
+
+// MÉTODOS DE PROMESAS
+
+// PROMISE.ALL - Esperar a que todas se resuelvan - array de promesas
+
+// function descargarImagen(nombre, tiempo) {
+
+//   return new Promise((resolve) => {
+
+//     console.log(`Descargando ${nombre}...`);
+//     setTimeout(() => {
+//       console.log(`${nombre} descargada!`);
+//       resolve(nombre);
+//     }, tiempo)
+//   })
+// }
+
+// const descargas = [
+//   descargarImagen("foto1.png", 1000),
+//   descargarImagen("foto2.png", 1500),
+//   descargarImagen("foto3.jpg", 800)
+// ];
+
+// Promise.all(descargas)
+//   .then(resultados => {
+//     console.log("Todas las imágenes descargardas:", resultados)
+//   })
+//   .catch(error => {
+//     console.error("Error en la descarga", error);
+//   })
+
+
+// === PROMISE.ALLSETTLED - Espera a todas las promesas (incluso si fallan)
+
+
+// function fetchAPI(url, tiempoRespuesta, falla = false) {
+
+//   return new Promise((resolve, reject) => {
+
+//     console.log("fetching url:", url);
+
+//     setTimeout(() => {
+//       if (falla) {
+//         console.log(`${url} falló`);
+//         reject(`Error en ${url}`);
+//       } else {
+//         console.log(`${url} OK`);
+//         resolve(`Datos obtenidos de ${url}`)
+//       }
+//     }, tiempoRespuesta)
+//   })
+// }
+
+// const peticiones = [
+//   fetchAPI("/api/users", 1000),
+//   fetchAPI("/api/posts", 1500, true),
+//   fetchAPI("/api/comments", 800)
+// ];
+
+// Promise.allSettled(peticiones)
+//   .then(resultados => {
+//     console.log("resultados de las peticiones", resultados)
+//   })
+
+
+// PROMISE.RACE - la primera que termine
+
+// function servidorRespuesta(nombre, tiempo) {
+
+//   return new Promise((resolve) => {
+
+//     setTimeout(() => {
+//       console.log(`${nombre} respondió`);
+//       resolve(nombre);
+//     }, tiempo)
+//   })
+// }
+
+// const servidores = [
+//   servidorRespuesta("Servidor EU", 1500),
+//   servidorRespuesta("Servidor US", 1000),
+//   servidorRespuesta("Servidor Asia", 2000)
+// ];
+
+
+// Promise.race(servidores)
+//   .then(ganador => {
+//     console.log(`Servidor más rápido: ${ganador}`);
+//   })
+
+
+// ==== PROMISE.ANY - La primera qu ese resuelva (ignora reject)
+
+function intentarConexion(servidor, exito, tiempo) {
+
+  return new Promise((resolve, reject) => {
+
+    setTimeout(() => {
+      if (exito) {
+        console.log(`${servidor} conectado`);
+        resolve(servidor)
+      } else {
+        console.log(`${servidor} falló`);
+        reject(`Error en ${servidor}`)
+      }
+    }, tiempo);
   })
-  .catch(error => {
-    console.log("Error:", error);
+}
+
+const intentos = [
+  intentarConexion("Servidor 1", false, 500),
+  intentarConexion("Servidor 2", true, 1000),
+  intentarConexion("Servidor 3", false, 1500)
+];
+
+Promise.any(intentos)
+  .then(exitoso => {
+    console.log(`Conectado a ${exitoso}`)
+  })
+  .catch(() => {
+    console.log("Todos los servidores fallaron")
   })
