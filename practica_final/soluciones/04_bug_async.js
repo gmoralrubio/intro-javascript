@@ -57,14 +57,17 @@ getUser(1)
   });
 
 
-// 2. Usando async/await:
-async function main() {
+// 2. Usando async/await (además con un bonus usando finally):
+async function getUserAync(userId) {
+  console.log("Getting user by ID...");
   try {
-    const user = await getUser(1);
+    const user = await getUser(userId);
     console.log("Usuario:", user);
   } catch (error) {
     console.log("Error:", error);
+  } finally {
+    console.log("End of process");
   }
 }
 
-main();
+getUserAync(1);
